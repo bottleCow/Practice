@@ -8,6 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TestController {
 	
+	@RequestMapping("memberForm")
+	public String memberForm() {
+		return "memberForm"; //memberForm.jsp로 이동해서 값을 받아옴
+	}
+	
+	@RequestMapping("member") // 이 방법을 많이 사용
+	public String member(Member member, Model model) {
+		model.addAttribute("member", member); // member class에 다 명시했기 때문에 코드가 간결함
+		return "member"; // member.jsp에서 ${member.name}으로 값 사용 가능
+	} 
+	
 	@RequestMapping("calForm")
 	public String calForm() {
 		return "calForm";
