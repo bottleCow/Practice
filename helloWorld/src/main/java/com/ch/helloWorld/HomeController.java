@@ -113,7 +113,7 @@ public class HomeController {
 	public String member(Member member, Model model) {
 		model.addAttribute("member", member); // member class에 다 명시했기 때문에 코드가 간결함
 		return "member"; // member.jsp에서 ${member.name}으로 값 사용 가능
-	}
+	} 
 	
 	
 }
