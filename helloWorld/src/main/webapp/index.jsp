@@ -9,7 +9,10 @@
 <body>
 	<script type="text/javascript">
 	//controller @RequestMapping으로 넘어감
-		location.href="calForm";
+		location.href="mem1.json";
+		// location.href="mem1";
+		// location.href="mem1List";
+		// location.href="calForm";
 		// location.href="memberForm";
 		// location.href="addrForm";
 		// location.href="guguForm";
