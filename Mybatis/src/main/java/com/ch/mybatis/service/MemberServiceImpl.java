@@ -7,7 +7,7 @@ import com.ch.mybatis.dao.MemberDao;
 
 @Service
 public class MemberServiceImpl implements MemberService{
-	@Autowired
+	@Autowired //.Dao와 연결
 	private MemberDao md;
 	
 }

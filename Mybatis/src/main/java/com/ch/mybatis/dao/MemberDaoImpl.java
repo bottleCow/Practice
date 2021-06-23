@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
-	@Autowired
+	@Autowired //데이터 연결
 	private SqlSessionTemplate sst;
 	
 }
