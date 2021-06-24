@@ -4,6 +4,7 @@
 <configuration>
 	<typeAliases> <!-- com.ch.mybatis.model.Member을 줄여서 member로 통일 -->
 		<typeAlias alias="member" type="com.ch.mybatis.model.Member"/>
+		<typeAlias alias="memberphoto" type="com.ch.mybatis.model.MemberPhoto"/>
 	</typeAliases>
 	<!-- 매퍼정보 설정 -->
 	<mappers>

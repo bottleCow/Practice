@@ -8,7 +8,12 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function del() {
-		
+		var cf = confirm("정말로 탈퇴 하시겠습니까?");
+		if (cf) location.href="delete.do";
+		else {
+			alert("취소되었습니다");
+			return;
+		}
 	}
 </script>
 </head>
@@ -18,6 +23,9 @@
 		<table class="table table-striped">
 			<tr>
 				<td><a href="view.do" class="btn btn-success">조회</a></td>
+			</tr>
+				<tr>
+				<td><a href="view2.do" class="btn btn-default">조회(사진 여러장)</a></td>
 			</tr>
 			<tr>
 				<td><a href="updateForm.do" class="btn btn-warning">수정</a></td>

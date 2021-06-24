@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,8 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ch.mybatis.model.Member;
+import com.ch.mybatis.model.MemberPhoto;
 import com.ch.mybatis.service.MemberService;
 
 @Controller //.service와 연결
@@ -67,6 +72,45 @@ public class MemberController {
 		return "join";
 	}
 	
+	@RequestMapping("joinForm2")
+	public String joinForm2() {
+		return "joinForm2";
+	}
+	
+	// 파일 여러개 업로드 가능한 가입
+	@RequestMapping("join2")
+	public String join2(Member member, Model model, HttpSession session, MultipartHttpServletRequest mhr) throws IOException {
+		int result = 0;
+		// member는 화면에서 입력한 데이터, member2는 db에서 id로 읽은 데이터
+		Member member2 = ms.select(member.getId());
+		if (member2 == null) {
+			//여러개 파일명을 한번에 받아옴
+			List<MultipartFile> list = mhr.getFiles("file");
+			//사진을 여러개 가진 list, 하나씩 photo에 저장 후 그것을 photos에 추가
+			List<MemberPhoto> photos = new ArrayList<MemberPhoto>();
+			// metadata에 저장
+			String real = session.getServletContext().getRealPath("/resources/upload");
+			// list의 사진을 하나씩 뽑아서 photos에 저장
+			for (MultipartFile mf : list) {
+				MemberPhoto mp = new MemberPhoto();
+				String fileName = mf.getOriginalFilename();
+				mp.setFileName(fileName);
+				mp.setId(member.getId());
+				// photos에는 사진 하나짜리 mp가 여러개 저장되어있음
+				photos.add(mp);
+				// 파일 업로드
+				FileOutputStream fos = new FileOutputStream(new File(real+"/"+fileName));
+				fos.write(mf.getBytes());
+				fos.close();
+				member.setFileName(fileName);
+			}
+			result = ms.insert(member);
+			if (result > 0) ms.insertPhoto(photos);
+		} else result = -1; // 이미 데이터가 있음
+		model.addAttribute("result", result);
+		return "join";
+	}
+	
 	@RequestMapping("loginForm")
 	public String loginForm() {
 		return "loginForm";
@@ -96,6 +140,65 @@ public class MemberController {
 		return "main";
 	}
 	
+	@RequestMapping("view")
+	public String view(Model model, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		Member member = ms.select(id);
+		model.addAttribute("member", member);
+		return "view";
+	}
+	
+	@RequestMapping("view2")
+	public String view2(Model model, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		Member member = ms.select(id);
+		List<MemberPhoto> list = ms.listPhoto(id);
+		model.addAttribute("member", member);
+		model.addAttribute("list", list);
+		return "view2";
+	}
+	
+	@RequestMapping("updateForm") //member에서 id를 받아와 updateform으로 이동
+	public String updateForm(Member member, Model model, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		member = ms.select(id);
+		model.addAttribute("member", member);
+		return "updateForm";
+	}
+	
+	@RequestMapping("update")
+	public String update(Member member, Model model, HttpSession session) throws IOException {
+		int result = 0;
+		// member는 화면에서 입력한 데이터
+		// 여기서 fileName은 값이 있을수도 있고(사용자가 수정할때 새로운사진 업로드하면) null일수도 있다
+		String fileName = member.getFile().getOriginalFilename();
+		if (fileName != null && !fileName.equals("")) {
+			member.setFileName(fileName); //파일명은 updateForm에서 받아오지 않았기때문에 따로 설정해줌
+			// metadata에 저장
+			String real = session.getServletContext().getRealPath("/resources/upload");
+			FileOutputStream fos = new FileOutputStream(new File(real+"/"+fileName));
+			fos.write(member.getFile().getBytes());
+			fos.close();
+		}
+		result = ms.update(member);
+		model.addAttribute("result", result);
+		return "update";
+	}
+	
+	@RequestMapping("delete")
+	public String delete(Member member, Model model, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		int result = ms.delete(id);
+		if (result > 0) session.invalidate(); //session 지우기
+		model.addAttribute("result", result);
+		return "delete";
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate(); //session 지우기
+		return "logout";
+	}
 	
 	
 }

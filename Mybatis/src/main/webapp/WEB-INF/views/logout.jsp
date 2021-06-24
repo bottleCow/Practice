@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +9,8 @@
 </head>
 <body>
 	<script type="text/javascript">
-		location.href = "joinForm2.do";
-	//	location.href = "main.do";
+		alert("로그아웃 됐습니다");
+		location.href="loginForm.do";
 	</script>
 </body>
 </html>

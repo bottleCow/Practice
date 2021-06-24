@@ -3,11 +3,39 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberns">
 	<!-- resultType은 configuration.xml에서 typeAlias에서 member.java에 있는 값 -->
+	
+	<!-- 조회 -->
 	<select id="select" parameterType="string" resultType="member">
 		select * from member4 where id=#{id}
 	</select>
 	
+	<!-- 회원 가입 -->
 	<insert id="insert" parameterType="member">
 		insert into member4 values(#{id}, #{email}, #{password}, #{name}, #{fileName}, 'n', sysdate)
 	</insert>
+	
+	<!-- 파일명이 있으면 변경하고 없으면 기존 파일명 그대로 사용 -->
+	<!-- if문 fileName앞에 ,추가 (null일 경우 대비) -->
+	<update id="update" parameterType="member">
+		update member4 set email=#{email}, password=#{password}, name=#{name}
+		<if test="fileName != null">
+			,fileName=#{fileName}
+		</if>
+		where id=#{id}
+	</update>
+	
+	<!-- 삭제 -->
+	<update id="delete" parameterType="String">
+		update member4 set del='y' where id=#{id}
+	</update>
+	
+	<!-- 여러파일 업로드 회원 가입 -->
+	<insert id="insertPhoto" parameterType="memberphoto">
+		insert into memberPhoto values(memberPhoto_seq.nextval, #{id}, #{fileName})
+	</insert>
+	
+	<!-- 사진 여러개 조회 기능 -->
+	<select id="listPhoto" parameterType="string" resultType="memberphoto">
+		select * from memberPhoto where id=#{id}
+	</select>
 </mapper>
