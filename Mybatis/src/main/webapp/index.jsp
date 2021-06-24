@@ -8,7 +8,8 @@
 </head>
 <body>
 	<script type="text/javascript">
-		location.href = "joinForm.do";
+	//	location.href = "joinForm.do";
+		location.href = "main.do";
 	</script>
 </body>
 </html>
