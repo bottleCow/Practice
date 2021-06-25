@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deptns">
+	<!-- Dept.java에 있는 SQL칼럼명하고 스프링에서 사용할 명칭을 다르게 설정할때, 같을 경우 생략  -->
+	<!-- 다른 명칭을 사용할때는 property값을 변경 -->
+	<resultMap type="dept" id="deptResult">
+		<result property="deptno" column="deptno" />
+		<result property="dname" column="dname" />
+		<result property="loc" column="loc" />
+	</resultMap>
+	
+	<!-- 조회 -->
+	<select id="list" resultType="dept">
+		select * from dept order by deptno
+	</select>
+
+</mapper>
