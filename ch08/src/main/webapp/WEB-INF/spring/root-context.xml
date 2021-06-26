@@ -4,9 +4,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-
-	<!-- Root Context: defines shared resources visible to all other web components -->
-
+	<context:property-placeholder location="classpath:db.properties" />
 	<!-- myBatis시작 -->
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -17,11 +15,7 @@
 	<bean id="session" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-	
-	<context:property-placeholder location="classpath:db.properties" />
-
 	<!-- DataBase Connection Pool -->
-	<!-- db.properties에서 값을 불러옴 -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="${driver}" />
 		<property name="jdbcUrl" value="${url}" />

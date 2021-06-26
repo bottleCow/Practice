@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deptns">
+	<!--SQL table과 class의 컬럼(속성)명이 다르게 하고 싶을 경우 -->
+	<resultMap type="dept" id="deptResult">
+		<result property="deptno" column="deptno" />
+		<result property="dname" column="dname" />
+		<result property="loc" column="loc" />
+	</resultMap>
+	
+	<!-- 다른 컬럼명 적용하기 -->
+	<select id="list" resultMap="deptResult">
+		select * from dept order by deptno
+	</select>
+	
+	<!-- resultType은 select에서만 적용 -->
+	<select id="select" parameterType="integer" resultType="dept">
+		select *
+		from dept where deptno=#{deptno}
+	</select>
+	
+	<insert id="insert" parameterType="dept">
+		insert into dept values (#{deptno},#{dname},#{loc})
+	</insert>
+	
+	<update id="update" parameterType="dept">
+		update dept set dname=#{dname}, loc=#{loc} where deptno=#{deptno}
+	</update>
+	
+	<delete id="delete" parameterType="integer">
+		delete from dept where deptno=#{deptno}
+	</delete>
+	
+</mapper>
