@@ -12,14 +12,12 @@
 		<result property="sal" column="sal" />
 		<result property="comm" column="comm" />
 		<result property="deptno" column="deptno" />
-		
 		<!-- 관리자 이름 출력용 -->
 		<result property="mgrName" column="mgrName" />
 		<!-- Emp.java 참고 -->
 		<!-- join용 부서정보 전체 -->
 		<collection property="dept" resultMap="deptResult"></collection>
 	</resultMap>
-	
 	<resultMap type="dept" id="deptResult">
 		<result property="deptno"	column="deptno"/>
 		<result property="dname"	column="dname"/>
@@ -39,17 +37,23 @@
 		select * from emp order by ename
 	</select>
 	
-	
-	<!-- <insert id="insert" parameterType="dept">
-		insert into dept values (#{deptno},#{dname},#{loc})
+	<insert id="insert" parameterType="emp">
+		insert into emp values (#{empno},#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno})
 	</insert>
 	
-	<update id="update" parameterType="dept">
-		update dept set dname=#{dname}, loc=#{loc} where deptno=#{deptno}
+	<update id="update" parameterType="emp">
+		update emp set ename=#{ename}, job=#{job}, mgr=#{mgr},
+		hiredate=#{hiredate},sal=#{sal},comm=#{comm},
+		deptno=#{deptno} where empno=#{empno}
 	</update>
 	
 	<delete id="delete" parameterType="integer">
-		delete from dept where deptno=#{deptno}
-	</delete> -->
+		delete from emp where empno=#{empno}
+	</delete>
+	
+	<!-- resultMap에서  empResult를 찾아서 collection을  찾아가서 join가능-->
+	<select id="allList" resultMap="empResult">
+		select e.*, d.* from emp e, dept d where e.deptno=d.deptno order by ename
+	</select>
 	
 </mapper>

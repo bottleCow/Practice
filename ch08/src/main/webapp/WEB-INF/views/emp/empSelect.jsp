@@ -10,6 +10,12 @@
 	$(function () {
 		$('#empList').load("empList.html table", "deptno=${emp.deptno}")
 	});
+	
+	function del(empno) {
+		var cf = confirm("정말로 삭제 하시겠습니까?");
+		if (cf) location.href="empDelete.html?empno="+empno;
+		else alert("삭제 취소");
+	}
 </script>
 </head>
 <body>
@@ -43,9 +49,9 @@
 			<tr>
 				<td colspan="4" align="center">
 				<a href="empList.html?deptno=${emp.deptno }" class="btn btn-default">직원 목록</a>
-				<a href="empUpdateForm.html?emp=${emp.empno }" class="btn btn-default">수정</a>
+				<a href="empUpdateForm.html?empno=${emp.empno }" class="btn btn-default">수정</a>
 				<a onclick="del(${emp.empno })" class="btn btn-default"> 삭제</a>
-				<a href="deptList.html" class="btn btn-default">직원 목록</a>
+				<a href="deptList.html" class="btn btn-default">부서 목록</a>
 				
 			</tr>
 		</table>

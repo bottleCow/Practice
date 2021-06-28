@@ -38,6 +38,18 @@ public class EmpController {
 		return "/emp/empSelect";
 	}
 	
+	@RequestMapping("empInsert")
+	public String empInsert(Emp emp, Model model) {
+		int result = 0;
+		//emp는 화면에서 입력한 데이터, emp2는 사번을 가지고 db에서 읽어온 데이터
+		Emp emp2 = es.select(emp.getEmpno());
+		if (emp2 == null) result = es.insert(emp);
+		else result = -1; //이미 있는 데이터 
+		model.addAttribute("result", result);
+		model.addAttribute("emp", emp);
+		return "/emp/empInsert";
+	}
+	
 	@RequestMapping("empInsertForm")
 	public String empInsertForm(int deptno, Model model) {
 		List<Dept> deptList = ds.list(); // 부서코드 선택
@@ -57,5 +69,41 @@ public class EmpController {
 		else data = "이미 사용중입니다";
 		return data;
 	}
+
+	@RequestMapping("empUpdateForm")
+	public String empUpdateForm(int empno, Model model) {
+		Emp emp = es.select(empno);
+		List<Dept> deptList = ds.list(); // 부서코드 선택
+		List<Emp> empList = es.empList();
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("empList", empList);
+		model.addAttribute("emp", emp);
+		return "/emp/empUpdateForm";
+	}
+
+	@RequestMapping("empUpdate")
+	public String empUpdate(Emp emp, Model model) {
+		int result = es.update(emp);
+		model.addAttribute("result", result);
+		model.addAttribute("emp", emp);
+		return "/emp/empUpdate";
+	}
+	
+	@RequestMapping("empDelete")
+	public String empDelete(int empno, Model model) {
+		Emp emp = es.select(empno);
+		int result = es.delete(empno);
+		model.addAttribute("result", result);
+		model.addAttribute("emp", emp);
+		return "/emp/empDelete";
+	}
+
+	@RequestMapping("allEmpList")
+	public String allEmpList(Model model) {
+		List<Emp> list = es.list();
+		model.addAttribute("list", list);
+		return "/emp/allEmpList";
+	}
+	
 	
 }
