@@ -10,14 +10,14 @@
 <body>
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
-			alert("수정 되었습니다");
+			alert("삭제 되었습니다");
 			location.href = "list.do?pageNum=${pageNum}";
 			/* location.href="view.do?num=${board.num}&pageNum=${pageNum}"; */
 		</script>
 	</c:if>
 	<c:if test="${result == 0 }">
 		<script type="text/javascript">
-			alert("수정이 실패하였습니다");
+			alert("삭제 실패");
 			history.back();
 		</script>
 	</c:if>

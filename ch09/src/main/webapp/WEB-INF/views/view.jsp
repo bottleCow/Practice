@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	$(function() { 
-		$('#boardDisp').load("list.do","pageNum=${pageNum}");
+	$(function() {
+		$('#boardDisp').load("list.do", "pageNum=${pageNum}");
 		/* $('#boardDisp').load("list.do table","pageNum=${pageNum}"); */
 	});
 </script>
@@ -16,7 +16,7 @@
 <body>
 	<div class="container" align="center">
 		<h2 class="text-primary">게시글 상세 내역</h2>
-		<table class="table table-bordered">
+		<table class="table table-striped table-bordered">
 			<tr>
 				<td>제목</td>
 				<td colspan="3">${board.subject }</td>
@@ -38,12 +38,14 @@
 				<td colspan="3"><pre>${board.content }</pre></td>
 			</tr>
 			<tr>
-				<td colspan="4" align="center">
-				<a href="list.do?pageNum=${pageNum }" class="btn btn-info">게시글 목록</a>
-				<a href="updateForm.do?num=${board.num }&pageNum=${pageNum}" class="btn btn-warning">수정 목록</a>
-				<!-- 회원 게시판일 경우 deleteForm.do 필요없음 function으로 바로 삭제-->
-				<a href="deleteForm.do?num=${board.num }&pageNum=${pageNum}" class="btn btn-danger">삭제 목록</a>
-				<a href="insertForm.do?num=${board.num }&pageNum=${pageNum}" class="btn btn-success">답글</a>
+				<td colspan="4" align="center"><a
+					href="list.do?pageNum=${pageNum }" class="btn btn-info">게시글 목록</a>
+					<a href="updateForm.do?num=${board.num}&pageNum=${pageNum }"
+					class="btn btn-warning">수정</a> <!-- 	회원 게시글일 경우에는 deleteForm없이 삭제 확인후에 바로 삭제 -->
+					<a href="deleteForm.do?num=${board.num}&pageNum=${pageNum }"
+					class="btn btn-danger">삭제</a> <a
+					href="insertForm.do?num=${board.num}&pageNum=${pageNum }"
+					class="btn btn-success">답글</a></td>
 			</tr>
 		</table>
 		<div id="boardDisp"></div>

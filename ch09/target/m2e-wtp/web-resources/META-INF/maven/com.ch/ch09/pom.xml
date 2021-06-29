@@ -14,7 +14,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
-	<dependencies>
+	<dependencies> 
 		<!-- javax.mail이 포함된 디펜던시 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
