@@ -21,5 +21,5 @@ public class BoardController {
 	List<BoardDto> list = bs.selectBoardList();
 	model.addAttribute("list", list);
 	return "/board/boardList";
-	}
+	}  //보드리스트로 이동
 }
