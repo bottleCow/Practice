@@ -22,4 +22,24 @@ public class BoardController {
 	model.addAttribute("list", list);
 	return "/board/boardList";
 	}  //보드리스트로 이동하기
+	
+	@RequestMapping("/board/boardWriteForm.do")
+	public String insert() {
+	return "/board/boardWriteForm";
+	}
+	
+	@RequestMapping("/board/insertBoard.do")
+	public String insertBoard(BoardDto board, Model model) {
+	int result = bs.insert(board);
+	model.addAttribute("result", result);
+	return "/board/insertBoard";
+	}
+	
+	@RequestMapping("/board/boardDetail.do")
+	public String boardDetail(int boardIdx, Model model) {
+	BoardDto board = bs.select(boardIdx);
+	model.addAttribute("board", board);
+	return "/board/boardDetail";
+	}
+	
 }

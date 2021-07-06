@@ -15,4 +15,14 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDto> selectBoardList() {
 		return bm.selectBoardList();
 	}
+
+	@Override
+	public int insert(BoardDto board) {
+		return bm.insert(board);
+	}
+
+	@Override
+	public BoardDto select(int boardIdx) {
+		return bm.select(boardIdx);
+	}
 }

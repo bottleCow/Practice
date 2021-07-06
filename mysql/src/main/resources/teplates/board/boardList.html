@@ -19,7 +19,9 @@
 			<!-- 리스트에 넘어옷 갯수가 0보다 클때 -->
 			<tr th:if="${#lists.size(list)} > 0" th:each="board:${list}">
 				<td th:text="${board.boardIdx}"></td>
-				<td th:text="${board.title}"></td>
+				<td class="title">
+					<a href="/board/boardDetail.do?boardIdx=" th:attrappend="href=${board.boardIdx}" th:text="${board.title}"></a>
+				</td>
 				<td th:text="${board.hitCnt}"></td>
 				<td th:text="${board.createdDate}"></td>
 			</tr>

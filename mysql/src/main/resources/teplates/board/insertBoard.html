@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 부트스트랩에서는 css파일을 static폴더에 저장 -->
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<span th:if="${result} > 0">
+		<script type="text/javascript">
+			alert("입력 되었습니다");
+			location.href = "/board/boardList.do";
+		</script>
+	</span>
+	<span th:if="${result} == 0">
+		<script type="text/javascript">
+			alert("입력 실패");
+			history.go(-1);
+		</script>
+	</span>
+</body>
+</html>
