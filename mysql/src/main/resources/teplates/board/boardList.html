@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 부트스트랩에서는 css파일을 static폴더에 저장 -->
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div class="container">
+		<h2>게시글 목록</h2>
+		<table class="board_list">
+			<tr>
+				<th>글번호</th>
+				<th>제목</th>
+				<th>조회수</th>
+				<th>작성일</th>
+			</tr>
+			<!-- 리스트에 넘어옷 갯수가 0보다 클때 -->
+			<tr th:if="${#lists.size(list)} > 0" th:each="board:${list}">
+				<td th:text="${board.boardIdx}"></td>
+				<td th:text="${board.title}"></td>
+				<td th:text="${board.hitCnt}"></td>
+				<td th:text="${board.createdDate}"></td>
+			</tr>
+			<!-- 리스트에 넘어옷 갯수가 0보다 작을때 -->
+			<tr th:unless="${#lists.size(list)} > 0">
+				<td colspan="4">데이터가 없습니다</td>
+			</tr>
+		</table>
+		<a href="/board/boardWriteForm.do" class="btn">글쓰기</a>
+	</div>
+</body>
+</html>
