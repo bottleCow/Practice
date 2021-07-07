@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<script th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<span th:if="${result} > 0">
+		<script type="text/javascript">
+			alert("수정 성공");
+			location.href = "/dept/deptList.do";
+		</script>
+	</span>
+	<span th:if="${result} == 0">
+		<script type="text/javascript">
+			alert("수정 실패");
+			history.go(-1);
+		</script>
+	</span>
+</body>
+</html>

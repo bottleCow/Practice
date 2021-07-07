@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ch.oracle.dao.DeptDao">
+	
+	<!-- 원래는 밑에 처럼 써야하지만 Alias를 사용해서 dept.java에 @Alias("dept"), DatabaseConfiguration에 sqlSessionFactoryBean.setTypeAliasesPackage("com.ch.mysql.dto")추가하면 dept로 사용가능; -->
+	<!-- <select id="deptList" resultType="com.ch.oracle.model.Dept"> -->
+	<select id="deptList" resultType="dept">
+		select * from dept order by deptno
+	</select>
+	
+	<select id="select" parameterType="integer" resultType="dept">
+		select * from dept where deptno=#{deptno}
+	</select>
+	
+	<insert id="insert" parameterType="dept">
+		insert into dept values(#{deptno}, #{dname}, #{loc})
+	</insert>
+	
+	<update id="update" parameterType="dept">
+		update dept set dname=#{dname}, loc=#{loc} where deptno=#{deptno} 
+	</update>
+	
+	<delete id="delete" parameterType="integer">
+		delete from dept where deptno=#{deptno}
+	</delete>
+	
+	
+</mapper>

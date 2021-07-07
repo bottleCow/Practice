@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<script th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<h2 class="text-primary">부서 목록</h2>
+		<table class="table table-bordered">
+			<tr>
+				<th>부서코드</th>
+				<th>부서명</th>
+				<th>근무지</th>
+				<th>수정</th>
+				<th>삭제</th>
+			</tr>
+			<tr th:if="${#lists.size(deptList)} == 0">
+				<th colspan="5">부서 데이터가 없습니다</th>
+			</tr>
+			</th:if>
+			<tr th:if="${#lists.size(deptList)} > 0" th:each="dept:${deptList}">
+				<td th:text="${dept.deptno}"></td>
+				<td><a href="/emp/empList.do?deptno="
+					th:attrappend="href=${dept.deptno}" class="btn btn-success btn-sm"
+					th:text="${dept.dname}"></a></td>
+				<td th:text="${dept.loc}"></td>
+				<td><a href="/dept/deptUpdateForm.do?deptno="
+					th:attrappend="href=${dept.deptno}" class="btn btn-sm btn-warning">수정</a></td>
+				<td><a href="/dept/deptDelete.do?deptno="
+					th:attrappend="href=${dept.deptno}" class="btn btn-sm btn-danger">삭제</a>
+			</tr>
+			</th:if>
+		</table>
+		<a class="btn btn-info" href="/dept/deptInsertForm.do">부서입력</a>
+		<a class="btn btn-default" href="/emp/empAllList.do">전 직원 조회</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<script th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+	$(function() { // 브라우저에 화면을 출력할 준비가 되면 실행
+		$('#deptList').load("/dept/deptList.do table");
+	});
+</script>
+</head>
+<body>
+	<div class="container" align="center">
+		<h2 class="text-primary">${dept.dname} 직원 목록</h2>
+		<table class="table table-striped">
+			<tr>
+				<td>사번</td>
+				<td>이름</td>
+				<td>업무</td>
+				<td>입사일</td>
+			</tr>
+			<tr th:if="${#lists.size(empList)} == 0">
+				<th colspan="4">직원이 없습니다</th>
+			</tr>
+			</th:if>
+			<tr th:if="${#lists.size(empList)} > 0" th:each="emp:${empList}">
+				<td th:text="${emp.empno}"></td>
+				<td><a class="btn btn-success btn-sm"
+					href="/emp/empSelect.do?empno=" th:attrappend="href=${emp.empno}"
+					th:text="${emp.ename}"></a></td>
+				<td th:text="${emp.job}"></td>
+				<td th:text="${emp.hiredate}"></td>
+			</tr>
+		</table>
+		<a href="/dept/deptList.do" class="btn btn-info">부서 목록</a>
+		<a href="/emp/empInsertForm.do?deptno="
+			th:attrappend="href=${dept.deptno}" class="btn btn-warning">직원정보 입력</a>
+		<div id="deptList"></div>
+	</div>
+</body>
+</html>

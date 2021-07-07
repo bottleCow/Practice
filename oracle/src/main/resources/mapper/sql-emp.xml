@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ch.oracle.dao.EmpDao">
+	
+	<!-- 원래는 밑에 처럼 써야하지만 Alias를 사용해서 dept.java에 @Alias("emp"), DatabaseConfiguration에 sqlSessionFactoryBean.setTypeAliasesPackage("com.ch.oracle.model")추가하면 emp로 사용가능; -->
+	<!-- <select id="deptList" resultType="com.ch.oracle.model.Emp"> -->
+	<select id="list" parameterType="integer" resultType="emp">
+		select * from emp where deptno=#{deptno} order by empno
+	</select>
+	
+	
+	
+	<select id="select" parameterType="integer" resultType="dept">
+		select * from dept where deptno=#{deptno}
+	</select>
+	
+	<insert id="insert" parameterType="dept">
+		insert into dept values(#{deptno}, #{dname}, #{loc})
+	</insert>
+	
+	<update id="update" parameterType="dept">
+		update dept set dname=#{dname}, loc=#{loc} where deptno=#{deptno} 
+	</update>
+	
+	<delete id="delete" parameterType="integer">
+		delete from dept where deptno=#{deptno}
+	</delete>
+	
+	
+</mapper>
