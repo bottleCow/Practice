@@ -13,4 +13,8 @@ public interface EmpDao {
 
 	List<Emp> empList();
 
+	Emp select(int empno);
+
+	int insert(Emp emp);
+
 }

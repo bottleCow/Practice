@@ -9,6 +9,10 @@ public interface EmpService {
 	List<Emp> list(int deptno);
 
 	List<Emp> empList();
+
+	Emp select(int empno);
+
+	int insert(Emp emp);
 	
 	
 	

@@ -14,12 +14,16 @@
 		select * from emp order by empno
 	</select>
 	
+	<select id="select" parameterType="integer" resultType="emp">
+		select * from emp where empno=#{empno}
+	</select>
 	
-	
-	
-	<insert id="insert" parameterType="dept">
-		insert into dept values(#{deptno}, #{dname}, #{loc})
+	<insert id="insert" parameterType="emp">
+		insert into emp values(#{empno}, #{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
 	</insert>
+	
+	
+	
 	
 	<update id="update" parameterType="dept">
 		update dept set dname=#{dname}, loc=#{loc} where deptno=#{deptno} 

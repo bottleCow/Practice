@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<style type="text/css">
+.err {
+	color: red;
+	font-weight: bold;
+}
+</style>
+<script th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<span th:if="${result} > 0"> <script type="text/javascript">
+		alert("입력 성공 ");
+//		입력한 직원정보를 보내서 제대로 입력됐는지 확인하기 위해서 사번 추가
+		location.href="empSelect.do?empno="+[[${emp.empno}]];
+	</script>
+	</span>
+	<span th:if="${result} == 0"> <script type="text/javascript">
+		alert("입력 실패 ");
+		history.go(-1);
+	</script>
+	</span>
+	<span th:if="${result} == -1"> <script type="text/javascript">
+		alert("이미 있는 데이터 이므로 입력 안돼요 ");
+		history.go(-1);
+	</script>
+	</span>
+</body>
+</html>

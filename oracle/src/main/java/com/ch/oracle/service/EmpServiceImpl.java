@@ -22,5 +22,15 @@ public class EmpServiceImpl implements EmpService {
 	public List<Emp> empList() {
 		return ed.empList();
 	}
+
+	@Override
+	public Emp select(int empno) {
+		return ed.select(empno);
+	}
+
+	@Override
+	public int insert(Emp emp) {
+		return ed.insert(emp);
+	}
 	
 }
