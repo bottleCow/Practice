@@ -13,6 +13,12 @@ public interface EmpService {
 	Emp select(int empno);
 
 	int insert(Emp emp);
+
+	int update(Emp emp);
+
+	int delete(int empno);
+
+	List<Emp> list();
 	
 	
 	

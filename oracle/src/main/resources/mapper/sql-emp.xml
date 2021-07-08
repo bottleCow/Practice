@@ -22,16 +22,13 @@
 		insert into emp values(#{empno}, #{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
 	</insert>
 	
-	
-	
-	
-	<update id="update" parameterType="dept">
-		update dept set dname=#{dname}, loc=#{loc} where deptno=#{deptno} 
+	<update id="update" parameterType="emp">
+		update emp set ename=#{ename}, job=#{job}, mgr=#{mgr}, hiredate=#{hiredate}, 
+		sal=#{sal}, comm=#{comm}, deptno=#{deptno} where empno=#{emptno} 
 	</update>
 	
 	<delete id="delete" parameterType="integer">
-		delete from dept where deptno=#{deptno}
+		delete from emp where empno=#{empno}
 	</delete>
-	
 	
 </mapper>

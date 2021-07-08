@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<script th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#empList').load("/emp/empList.do table", "deptno=${emp.deptno}")
+	});
+	function del() {
+		var cf = confirm("정말로 삭제 하시겠습니까?");
+		if (cf) location.href="/emp/empDelete.do?empno="+[[${emp.empno}]];
+		else alert("삭제가 취소 되었습니다");
+	}
+</script>
+</head>
+<body>
+	<div class="container" align="center">
+		<h2>직원정보 상세</h2>
+		<table class="table table-bordered table-hover">
+			<tr>
+				<td>사번</td>
+				<td th:text="${emp.empno }"></td>
+				<td>이름</td>
+				<td th:text="${emp.ename }"></td>
+			</tr>
+			<tr>
+				<td>업무</td>
+				<td th:text="${emp.job}"></td>
+				<td>관리자</td>
+				<td th:text="${emp.mgr }"></td>
+			</tr>
+			<tr>
+				<td>입사일</td>
+				<td th:text="${emp.hiredate}"></td>
+				<td>급여</td>
+				<td th:text="${emp.sal }"></td>
+			</tr>
+			<tr>
+				<td>커미션</td>
+				<td th:text="${emp.comm }"></td>
+				<td>부서코드</td>
+				<td th:text="${emp.deptno}"></td>
+			</tr>
+			<tr>
+				<td colspan="4" align="center"><a
+					href="/emp/empList.do?deptno=" th:attrappend="href=${emp.deptno}"
+					class="btn btn-info">직원 목록</a> <a
+					href="/emp/empUpdateForm.do?empno="
+					th:attrappend="href=${emp.empno}" class="btn btn-warning">수정</a> <a
+					onclick="del()" class="btn btn-danger">삭제</a> <a
+					href="/dept/deptList.do" class="btn btn-success">부서목록</a></td>
+		</table>
+		<div id="empList"></div>
+	</div>
+</body>
+</html>

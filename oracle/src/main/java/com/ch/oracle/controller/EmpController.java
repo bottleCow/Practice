@@ -60,37 +60,41 @@ public class EmpController {
 		model.addAttribute("emp", emp);
 		return "/emp/empInsert";
 	}
-//	@RequestMapping("empUpdateForm")
-//	public String empUpdateForm(int empno, Model model) {
-//		Emp emp = es.select(empno);
-//		List<Dept> deptList = ds.list();
-//		List<Emp> empList = es.empList();
-//		model.addAttribute("emp", emp);
-//		model.addAttribute("deptList", deptList);
-//		model.addAttribute("empList", empList);
-//		return "/emp/empUpdateForm";
-//	}
-//	@RequestMapping("empUpdate")
-//	public String empUpdate(Emp emp, Model model) {
-//		int result = es.update(emp);
-//		model.addAttribute("result", result);
-//		model.addAttribute("emp", emp);
-//		return "/emp/empUpdate";
-//	}
-//	@RequestMapping("empDelete")
-//	public String empDelete(int empno, Model model) {
-//		Emp emp = es.select(empno);
-//		int result = es.delete(empno);
-//		model.addAttribute("result", result);
-//		model.addAttribute("emp", emp);
-//		return "/emp/empDelete";
-//	}
-//	@RequestMapping("allEmpList")
-//	public String allEmpList(Model model) {
-//		List<Emp> list = es.list();
-//		model.addAttribute("list", list);
-//		return "/emp/allEmpList";		
-//	}
+	
+	@RequestMapping("/emp/empUpdateForm.do")
+	public String empUpdateForm(int empno, Model model) {
+		Emp emp = es.select(empno);
+		List<Dept> deptList = ds.deptList();
+		List<Emp> empList = es.empList();
+		model.addAttribute("emp", emp);
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("empList", empList);
+		return "/emp/empUpdateForm";
+	}
+	
+	@RequestMapping("/emp/empUpdate.do")
+	public String empUpdate(Emp emp, Model model) {
+		int result = es.update(emp);
+		model.addAttribute("result", result);
+		model.addAttribute("emp", emp);
+		return "/emp/empUpdate";
+	}
+	
+	@RequestMapping("/emp/empDelete.do")
+	public String empDelete(int empno, Model model) {
+		Emp emp = es.select(empno);
+		int result = es.delete(empno);
+		model.addAttribute("result", result);
+		model.addAttribute("emp", emp);
+		return "/emp/empDelete";
+	}
+	
+	@RequestMapping("/emp/empAllList.do")
+	public String allEmpList(Model model) {
+		List<Emp> list = es.list();
+		model.addAttribute("list", list);
+		return "/emp/allEmpList";		
+	}
 	
 	@RequestMapping("/emp/empSelect.do")
 	public String empSelect(int empno, Model model) {

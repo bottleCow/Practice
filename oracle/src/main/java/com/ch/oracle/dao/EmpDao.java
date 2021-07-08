@@ -17,4 +17,10 @@ public interface EmpDao {
 
 	int insert(Emp emp);
 
+	int update(Emp emp);
+
+	int delete(int empno);
+
+	List<Emp> list();
+
 }
