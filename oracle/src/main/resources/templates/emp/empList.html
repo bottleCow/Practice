@@ -23,7 +23,7 @@
 				<td>입사일</td>
 			</tr>
 			<tr th:if="${#lists.size(empList)} == 0">
-				<th colspan="4">직원이 없습니다</th>
+				<th colspan="4">직원이 없습니다 </th>
 			</tr>
 			<tr th:if="${#lists.size(empList)} > 0" th:each="emp:${empList}">
 				<td th:text="${emp.empno}"></td>
