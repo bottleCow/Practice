@@ -1,24 +1,34 @@
 package com.ch.ch14.model;
-
 import java.sql.Date;
 
-import lombok.Data;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import lombok.Data;
+@Entity
+@Table(name = "emp")
 @Data
 public class Emp {
-	// hibernate 또는 JPA에서 int 부분에 null이 있으면 에러, integer가 정상처리 됨
-	private int empno;
+	@Id
+	private int empno;		
 	private String ename;
-	private String job;
-	private int mgr; // 관리자 manager
-	private Date hiredate;
+	private String job;		
+	private Integer mgr;
+	private Date hiredate;	
 	private int sal;
-	private int comm;
+	private Integer comm;		
 	private int deptno;
-	
-	// 관리자 이름 보기
-	private String mgrName;
-	
-	// Dept테이블 join 하기
+	// join용
 	private Dept dept;
+	@Id // id가 primary key
+	@Column(name = "empno")
+	public int getEmpno() {		return empno;	}
+	@ManyToOne
+	@JoinColumn(name = "deptno",referencedColumnName="deptno",insertable=false, updatable=false)
+	public Dept getDept() {		return dept;	}
+	public void setDept(Dept dept) {		this.dept = dept;	}
 }
