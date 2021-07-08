@@ -11,4 +11,6 @@ public interface EmpDao {
 
 	List<Emp> list(int deptno);
 
+	List<Emp> empList();
+
 }

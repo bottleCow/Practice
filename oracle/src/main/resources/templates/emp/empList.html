@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="container" align="center">
-		<h2 class="text-primary">${dept.dname} 직원 목록</h2>
+		<h2 class="text-primary"><span th:text="${dept.dname}"></span>직원 목록</h2>
 		<table class="table table-striped">
 			<tr>
 				<td>사번</td>
@@ -25,7 +25,6 @@
 			<tr th:if="${#lists.size(empList)} == 0">
 				<th colspan="4">직원이 없습니다</th>
 			</tr>
-			</th:if>
 			<tr th:if="${#lists.size(empList)} > 0" th:each="emp:${empList}">
 				<td th:text="${emp.empno}"></td>
 				<td><a class="btn btn-success btn-sm"

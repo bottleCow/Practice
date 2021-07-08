@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<style type="text/css">
+.err {
+	color: red;
+	font-weight: bold;
+}
+</style>
+<script th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+	function empNoChk() {
+		if (!frm.empno.value) {
+			alert("사번 입력한 후에 체크 하시오");
+			frm.empno.focus();
+			return false;
+		}
+		$.post('/emp/empNoChk.do', 'empno=' + frm.empno.value, function(data) {
+			$('#empNoChk').html(data);
+		});
+	}
+</script>
+</head>
+<body>
+	<div class="container" align="center">
+		<h2 class="text-primary">직원정보 입력</h2>
+		<form action="/emp/empInsert.do" method="post" name="frm">
+			<table class="table table-bordered">
+				<tr>
+					<td>사번</td>
+					<td><input type="number" name="empno" required="required"
+						autofocus="autofocus"> <input type="button" value="중복체크"
+						onclick="empNoChk()" class="btn btn-sm btn-warning">
+						<div id="empNoChk" class="err"></div></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" name="ename" required="required"></td>
+				</tr>
+				<tr>
+					<td>업무</td>
+					<td><input type="text" name="job" required="required"></td>
+				</tr>
+				<tr>
+					<td>관리자 사번</td>
+					<td><select name="mgr">
+							<option th:each="emp:${empList}" th:value="${emp.empno}"
+								th:text="${emp.ename}+'('+${emp.empno}+')'"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>입사일</td>
+					<td><input type="date" name="hiredate" required="required"></td>
+				</tr>
+				<tr>
+					<td>급여</td>
+					<td><input type="number" name="sal" required="required"></td>
+				</tr>
+				<tr>
+					<td>커미션</td>
+					<td><input type="number" name="comm" required="required"></td>
+				</tr>
+				<tr>
+					<td>부서코드</td>
+					<td><select name="deptno">
+							<option th:each="dept:${deptList}" th:value="${dept.deptno}"
+								th:if="${dept.deptno == deptno }" selected="selected"
+								th:text="${dept.dname}+'('+${dept.deptno}+')'"></option>
+							<option th:each="dept:${deptList}"
+								th:if="${dept.deptno != deptno }"
+								th:text="${dept.dname}+'('+${dept.deptno}+')'"
+								th:value="${dept.deptno}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit" value="확인" class="btn btn-danger"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

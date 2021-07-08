@@ -7,6 +7,8 @@ import com.ch.oracle.model.Emp;
 public interface EmpService {
 
 	List<Emp> list(int deptno);
+
+	List<Emp> empList();
 	
 	
 	

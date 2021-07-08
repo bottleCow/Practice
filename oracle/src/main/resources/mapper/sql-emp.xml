@@ -10,11 +10,12 @@
 		select * from emp where deptno=#{deptno} order by empno
 	</select>
 	
-	
-	
-	<select id="select" parameterType="integer" resultType="dept">
-		select * from dept where deptno=#{deptno}
+	<select id="empList" resultType="emp">
+		select * from emp order by empno
 	</select>
+	
+	
+	
 	
 	<insert id="insert" parameterType="dept">
 		insert into dept values(#{deptno}, #{dname}, #{loc})

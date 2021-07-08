@@ -31,16 +31,16 @@ public class EmpController {
 		return "/emp/empList";
 	}
 	
+	@RequestMapping("/emp/empInsertForm.do")
+	public String empInsertForm(int deptno, Model model) {
+		List<Dept> deptList = ds.deptList();  // 부서코드 선택
+		List<Emp> empList = es.empList(); // 관리자 사번 선택
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("empList", empList);
+		model.addAttribute("deptno", deptno);
+		return "/emp/empInsertForm";
+	}
 	
-//	@RequestMapping("empInsertForm")
-//	public String empInsertForm(int deptno, Model model) {
-//		List<Dept> deptList = ds.list();  // 부서코드 선택
-//		List<Emp> empList = es.empList(); // 관리자 사번 선택
-//		model.addAttribute("deptList", deptList);
-//		model.addAttribute("empList", empList);
-//		model.addAttribute("deptno", deptno);
-//		return "/emp/empInsertForm";
-//	}
 //	@RequestMapping(value = "empNoChk", produces = "text/html;charset=utf-8")
 //	@ResponseBody
 //	public String empNoChk(int empno) {
