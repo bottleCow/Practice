@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<script th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container" align="center">
+		<h2>전직원 목록</h2>
+		<table class="table table-bordered table-striped">
+			<tr>
+				<td>사번</td>
+				<td>이름</td>
+				<td>업무</td>
+				<td>입사일</td>
+				<td>급여</td>
+				<td>부서명</td>
+				<td>근무지</td>
+			</tr>
+			<tr th:if="${#lists.size(list)}==0">
+				<th colspan="7">직원이 없습니다</th>
+			</tr>
+			<tr th:if="${#lists.size(list)} > 0" th:each="emp:${list}">
+				<td th:text="${emp.empno }"></td>
+				<td th:text="${emp.ename }"></td>
+				<td th:text="${emp.job }"></td>
+				<td th:text="${emp.hiredate }"></td>
+				<td th:text="${emp.sal }"></td>
+				<td th:text="${emp.dname}"></td>
+				<td th:text="${emp.loc}"></td>
+			</tr>sssss
+		</table>
+		<a href="/dept/deptList.do" class="btn btn-info">부서 목록</a>
+	</div>
+</body>
+</html>
