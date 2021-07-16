@@ -8,10 +8,10 @@
 </head>
 <body>
 	<script type="text/javascript">
-		location.href="json.do";
+		// location.href="json.do";
 		// location.href="jsonBoard.do";
 		// location.href="mailForm.do";
-		// location.href="list.do";
+		 location.href="list.do";
 	</script>
 </body>
 </html>
