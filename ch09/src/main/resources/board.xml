@@ -54,7 +54,7 @@
 	<insert id="insert" parameterType="board">
 		insert into board values
 		(#{num},#{writer},#{subject},#{content}, #{email},0,#{password},#{ref},#{re_step},#{re_level},#{ip},sysdate,'n')
-	</insert>
+	</insert> 
 	
 	
 	
