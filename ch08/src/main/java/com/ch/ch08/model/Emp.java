@@ -19,6 +19,6 @@ public class Emp {
 	// 관리자 이름 보기
 	private String mgrName;
 	
-	// Dept테이블 join 하기
+	// Dept 테이블 join 하기
 	private Dept dept;
 }
