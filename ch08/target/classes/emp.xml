@@ -51,6 +51,7 @@
 		delete from emp where empno=#{empno}
 	</delete>
 	
+	<!-- dept 테이블과 join 해서 사용됨 -->
 	<!-- resultMap에서  empResult를 찾아서 collection을  찾아가서 join가능-->
 	<select id="allList" resultMap="empResult">
 		select e.*, d.* from emp e, dept d where e.deptno=d.deptno order by ename
